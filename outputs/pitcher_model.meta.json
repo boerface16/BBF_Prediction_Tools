@@ -1,0 +1,106 @@
+{
+  "model_type": "ensemble",
+  "blend_weights": [
+    0.579851247543689,
+    0.4201487524563111
+  ],
+  "xgb_params": {
+    "n_estimators": 223,
+    "max_depth": 5,
+    "learning_rate": 0.027096521578079028,
+    "subsample": 0.7297496703509608,
+    "colsample_bytree": 0.5114279264589054,
+    "min_child_weight": 5,
+    "reg_alpha": 6.724403737427422e-06,
+    "reg_lambda": 3.13802843078394e-05,
+    "random_state": 42,
+    "enable_categorical": 0
+  },
+  "lgb_params": {
+    "n_estimators": 350,
+    "max_depth": 10,
+    "learning_rate": 0.014522184466429819,
+    "subsample": 0.9954099478292051,
+    "colsample_bytree": 0.9253679817780645,
+    "min_child_weight": 8,
+    "reg_alpha": 3.325836179887566e-05,
+    "reg_lambda": 0.00035592541462320853,
+    "random_state": 42,
+    "verbose": -1
+  },
+  "feature_cols": [
+    "G",
+    "p_ipouts",
+    "p_bfp",
+    "IP",
+    "ERA",
+    "WHIP",
+    "K9",
+    "BB9",
+    "HR9",
+    "K_pct",
+    "BB_pct",
+    "K_BB_pct",
+    "BABIP_allowed",
+    "LOB_pct",
+    "ERA_minus",
+    "FIP",
+    "FIP_minus",
+    "xFIP",
+    "xFIP_minus",
+    "is_starter",
+    "is_closer",
+    "p_gs",
+    "p_gf",
+    "xera",
+    "brl_percent_allowed",
+    "ev95percent_against",
+    "avg_ev_against",
+    "est_woba",
+    "weighted_whiff_pct",
+    "avg_hard_hit_pct",
+    "GB_pct",
+    "BABIP_gap",
+    "ERA_FIP_gap",
+    "LOB_pct_dev",
+    "team_win_pct",
+    "experience"
+  ],
+  "test_metrics": {
+    "label": "ensemble_test",
+    "MAE": 81.44985720991254,
+    "RMSE": 103.80517333177565,
+    "Spearman": 0.4547389323709555,
+    "p_value": 1.759487277354939e-17
+  },
+  "xgb_test_metrics": {
+    "label": "xgb_test",
+    "MAE": 80.9166736178928,
+    "RMSE": 103.4909099187677,
+    "Spearman": 0.4633755826950696,
+    "p_value": 3.585822723418544e-18
+  },
+  "lgb_test_metrics": {
+    "label": "lgb_test",
+    "MAE": 82.7442241999237,
+    "RMSE": 105.21849634173932,
+    "Spearman": 0.43934384881032745,
+    "p_value": 2.6865850138296954e-16
+  },
+  "val_metrics": {
+    "xgb": {
+      "label": "xgb_tuned",
+      "MAE": 79.39547068120525,
+      "RMSE": 102.97095906424109,
+      "Spearman": 0.5222848507978893,
+      "p_value": 5.298473018762099e-24
+    },
+    "lgb": {
+      "label": "lgb_tuned",
+      "MAE": 79.86622133321917,
+      "RMSE": 103.07660995110706,
+      "Spearman": 0.5214663360913402,
+      "p_value": 6.4070259149718815e-24
+    }
+  }
+}

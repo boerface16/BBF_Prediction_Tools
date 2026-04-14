@@ -1,0 +1,179 @@
+{
+  "model_type": "ensemble",
+  "blend_weights": [
+    0.46179008773493374,
+    0.5382099122650663
+  ],
+  "blend_intercept": 0.0,
+  "clip_range": [
+    0,
+    650
+  ],
+  "xgb_params": {
+    "n_estimators": 906,
+    "max_depth": 3,
+    "learning_rate": 0.0126807459533533,
+    "subsample": 0.7941691137385606,
+    "colsample_bytree": 0.5112104461389823,
+    "min_child_weight": 17,
+    "reg_alpha": 0.05795780508435785,
+    "reg_lambda": 0.004346921726842674,
+    "huber_slope": 87.85940249933373,
+    "random_state": 789,
+    "enable_categorical": 0,
+    "objective": "reg:pseudohubererror"
+  },
+  "lgb_params": {
+    "n_estimators": 579,
+    "max_depth": 3,
+    "learning_rate": 0.11717971014713449,
+    "subsample": 0.9531138579409251,
+    "colsample_bytree": 0.6246893888310645,
+    "min_child_weight": 15,
+    "reg_alpha": 3.5549722704830494e-07,
+    "reg_lambda": 9.276673482543559e-06,
+    "alpha": 146.5043602829033,
+    "random_state": 789,
+    "verbose": -1,
+    "objective": "huber"
+  },
+  "feature_cols": [
+    "G",
+    "p_ipouts",
+    "p_bfp",
+    "ERA",
+    "WHIP",
+    "K9",
+    "BB9",
+    "HR9",
+    "K_BB_pct",
+    "BABIP_allowed",
+    "LOB_pct",
+    "ERA_minus",
+    "xFIP_minus",
+    "xera",
+    "brl_percent_allowed",
+    "ev95percent_against",
+    "weighted_whiff_pct",
+    "avg_hard_hit_pct",
+    "swstr_pct",
+    "csw_pct",
+    "zone_pct",
+    "chase_pct",
+    "ff_avg_speed",
+    "GB_pct",
+    "BABIP_gap",
+    "ERA_FIP_gap",
+    "team_win_pct",
+    "experience",
+    "K9_delta",
+    "ERA_delta",
+    "WHIP_delta",
+    "BB9_delta",
+    "ff_velo_delta"
+  ],
+  "test_metrics": {
+    "label": "ensemble_test",
+    "MAE": 83.78954801010742,
+    "RMSE": 106.02491753600853,
+    "Spearman": 0.4930825276295458,
+    "p_value": 6.872669075255829e-09
+  },
+  "xgb_test_metrics": {
+    "label": "xgb_test",
+    "MAE": 85.5152247359113,
+    "RMSE": 106.25048008440868,
+    "Spearman": 0.4879490391948845,
+    "p_value": 1.036684205347188e-08
+  },
+  "lgb_test_metrics": {
+    "label": "lgb_test",
+    "MAE": 84.46103505345557,
+    "RMSE": 109.23642804347763,
+    "Spearman": 0.4722648132236579,
+    "p_value": 3.4933440732815697e-08
+  },
+  "val_metrics": {
+    "xgb": {
+      "label": "xgb_tuned",
+      "MAE": 55.94498540534348,
+      "RMSE": 72.43644599385256,
+      "Spearman": 0.8289892620881404,
+      "p_value": 4.5223311091267953e-32
+    },
+    "lgb": {
+      "label": "lgb_tuned",
+      "MAE": 20.117930287896822,
+      "RMSE": 27.25788059171406,
+      "Spearman": 0.9821274853703382,
+      "p_value": 6.732569729708406e-89
+    }
+  },
+  "seed_results": {
+    "xgb": [
+      {
+        "seed": 42,
+        "val_spearman": 0.8190426466619737,
+        "val_mae": 57.964455432579165,
+        "val_rmse": 74.42742223668834
+      },
+      {
+        "seed": 123,
+        "val_spearman": 0.9739719216255612,
+        "val_mae": 24.825069208614153,
+        "val_rmse": 35.7234209954717
+      },
+      {
+        "seed": 456,
+        "val_spearman": 0.7937564336250875,
+        "val_mae": 62.02537455324267,
+        "val_rmse": 78.91394690936636
+      },
+      {
+        "seed": 789,
+        "val_spearman": 0.8289892620881404,
+        "val_mae": 55.94498540534348,
+        "val_rmse": 72.43644599385256
+      },
+      {
+        "seed": 1010,
+        "val_spearman": 0.996155187192291,
+        "val_mae": 10.630460066873521,
+        "val_rmse": 15.625109243936727
+      }
+    ],
+    "lgb": [
+      {
+        "seed": 42,
+        "val_spearman": 0.8476234695260654,
+        "val_mae": 48.41303958960106,
+        "val_rmse": 69.43647990956389
+      },
+      {
+        "seed": 123,
+        "val_spearman": 0.9474432077912537,
+        "val_mae": 26.12532467813961,
+        "val_rmse": 43.81140662421317
+      },
+      {
+        "seed": 456,
+        "val_spearman": 0.9858186380052314,
+        "val_mae": 14.844077456964767,
+        "val_rmse": 24.74460009057392
+      },
+      {
+        "seed": 789,
+        "val_spearman": 0.9821274853703382,
+        "val_mae": 20.117930287896822,
+        "val_rmse": 27.25788059171406
+      },
+      {
+        "seed": 1010,
+        "val_spearman": 0.9982271233624593,
+        "val_mae": 5.676671933888788,
+        "val_rmse": 7.566726444135219
+      }
+    ],
+    "selection_method": "median_spearman"
+  }
+}

@@ -1,0 +1,314 @@
+# Fantasy Baseball H2H Points Prediction Tool — Configuration
+# Team: Twist and Trout
+
+paths:
+  raw:
+    batting: data/raw/retrosheet/batting.csv
+    pitching: data/raw/retrosheet/pitching.csv
+    plays: data/raw/retrosheet/plays.csv
+    allplayers: data/raw/retrosheet/allplayers.csv
+    gameinfo: data/raw/retrosheet/gameinfo.csv
+    teamstats: data/raw/retrosheet/teamstats.csv
+    id_map: data/raw/id_map.csv
+    statcast_batters: data/raw/statcast/statcast_batters_2015_2025.csv
+    statcast_pitchers: data/raw/statcast/statcast_pitchers_2015_2025.csv
+    statcast_arsenal: data/raw/statcast/statcast_pitchers_arsenal_2015_2025.csv
+    statcast_pitch_arsenal: data/raw/statcast/statcast_pitchers_pitch_arsenal_2015_2025.csv
+    keepers: data/keepers_candidates.txt
+    fangraphs_batters: data/raw/features/fangraphs_batters_leaderboard_2015_2025.csv
+    fangraphs_pitchers: data/raw/features/fangraphs_pitchers_leaderboard_2015_2025.csv
+    fg_id_map: data/raw/features/id_map_2015_2025.csv
+  processed:
+    batters_season: data/processed/batters_season.csv
+    pitchers_season: data/processed/pitchers_season.csv
+    season_constants: data/processed/season_constants.csv
+    re_matrix: data/processed/re_matrix.csv
+    batter_re24: data/processed/batter_re24.csv
+    pitcher_re24: data/processed/pitcher_re24.csv
+    batted_ball: data/processed/batted_ball.csv
+    batter_features: data/processed/batter_features.csv
+    pitcher_features: data/processed/pitcher_features.csv
+  outputs:
+    draft_rankings_batters: outputs/draft_rankings_batters.csv
+    draft_rankings_pitchers: outputs/draft_rankings_pitchers.csv
+    keeper_rankings: outputs/keeper_rankings.csv
+    model_performance: outputs/model_performance_report.csv
+    re24_exclusions: outputs/re24_exclusions.csv
+    batter_model: outputs/batter_model.json
+    pitcher_model: outputs/pitcher_model.json
+    batter_model_lgb: outputs/batter_model_lgb.json
+    pitcher_model_lgb: outputs/pitcher_model_lgb.json
+    pitcher_sp_model: outputs/pitcher_sp_model.json
+    pitcher_sp_model_lgb: outputs/pitcher_sp_model_lgb.json
+    pitcher_rp_model: outputs/pitcher_rp_model.json
+    pitcher_rp_model_lgb: outputs/pitcher_rp_model_lgb.json
+  figures:
+    feature_importance: outputs/figures/feature_importance
+    scatter_trends: outputs/figures/scatter_trends
+    model_evaluation: outputs/figures/model_evaluation
+    keeper_trajectories: outputs/figures/keeper_trajectories
+
+# Column mappings: actual CSV name -> semantic meaning
+columns:
+  batting:
+    player_id: id
+    game_id: gid
+    pa: b_pa
+    ab: b_ab
+    runs: b_r
+    hits: b_h
+    doubles: b_d
+    triples: b_t
+    hr: b_hr
+    rbi: b_rbi
+    sh: b_sh
+    sf: b_sf
+    hbp: b_hbp
+    bb: b_w
+    ibb: b_iw
+    so: b_k
+    sb: b_sb
+    cs: b_cs
+    gdp: b_gdp
+    date: date
+    gametype: gametype
+  pitching:
+    player_id: id
+    game_id: gid
+    ipouts: p_ipouts
+    bf: p_bfp
+    hits: p_h
+    doubles: p_d
+    triples: p_t
+    hr: p_hr
+    runs: p_r
+    er: p_er
+    bb: p_w
+    ibb: p_iw
+    so: p_k
+    hbp: p_hbp
+    gs: p_gs
+    gf: p_gf
+    wp_id: wp
+    lp_id: lp
+    sv_id: save
+    date: date
+    gametype: gametype
+  statcast_batters:
+    player_id: player_id
+    year: year
+    barrel_pct: brl_percent
+    ev95_pct: ev95percent
+    avg_ev: avg_hit_speed
+    sweet_spot_pct: anglesweetspotpercent
+    est_ba: est_ba
+    est_slg: est_slg
+    est_woba: est_woba
+    sprint_speed: sprint_speed
+  statcast_pitchers:
+    player_id: player_id
+    year: year
+    barrel_pct: brl_percent
+    ev95_pct: ev95percent
+    avg_ev: avg_hit_speed
+    sweet_spot_pct: anglesweetspotpercent
+    est_ba: est_ba
+    est_slg: est_slg
+    est_woba: est_woba
+    era: era
+    xera: xera
+    era_xera_diff: era_minus_xera_diff
+    swstr_pct: swstr_pct
+    csw_pct: csw_pct
+    zone_pct: zone_pct
+    chase_pct: chase_pct
+  statcast_pitch_arsenal:
+    pitcher: pitcher
+    year: year
+    ff_avg_speed: ff_avg_speed
+  statcast_arsenal:
+    player_id: player_id
+    year: year
+    pitch_type: pitch_type
+    pitch_name: pitch_name
+    whiff_pct: whiff_percent
+    usage: pitch_usage
+    hard_hit_pct: hard_hit_percent
+    rv_per_100: run_value_per_100
+
+seasons:
+  all: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+  train: [2017, 2018, 2019, 2020, 2021, 2022, 2023]  # default (pitcher)
+  train_batter: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+  train_pitcher: [2017, 2018, 2019, 2020, 2021, 2022, 2023]
+  validation: [2023]  # last CV fold val year (for blend weights)
+  test: [2024]
+  predict: [2025]
+  arsenal_start_year: 2017
+  cv_folds:  # default (pitcher)
+    - train_end: 2020
+      val: [2021]
+    - train_end: 2021
+      val: [2022]
+    - train_end: 2022
+      val: [2023]
+  cv_folds_batter:
+    - train_end: 2018
+      val: [2019]
+    - train_end: 2020
+      val: [2021]
+    - train_end: 2021
+      val: [2022]
+
+thresholds:
+  batter_pa: 200
+  pitcher_ip_outs: 150  # 50 IP * 3
+  batter_pa_2020: 70
+  pitcher_ip_outs_2020: 50  # ~17 IP * 3
+  max_null_rate: 0.50
+
+espn_league:
+  league_id: 30294024
+  year: 2026
+  espn_s2: "AEAU7BdptPDjL%2FjAEYT468VTpbPcinyeOFM4hB2UoLcI8R8hFkd4dPpSY32FdkUc4%2Fo%2FKZdLeuS6EesXRxCQ%2BIm9hjCaG0lcrSU4VpEG5snQoapCOWNY1dINGIx19C9q2qNdXIX3vV%2BN7ZG%2FOfZbA7t%2Bw8ERNMU2y9w%2BqL8DshN95%2BPRST4GwDqBeAEeme%2FPs8mCl0vS8UqE%2FGdQCA8h4Mm96hbh%2FWLrxApiQmL4oxNc78X9ZijHBe3zGGN%2FGpnpfm%2F7hbdR1hWKM2Vxjnr5KzOq"
+  swid: "{F01945FD-BE32-4BFF-AA41-E08B5ED4F94E}"
+
+espn_scoring:
+  batter:
+    TB: 1
+    R: 1
+    RBI: 1
+    BB: 1
+    SB: 1
+    SO: -1
+  pitcher:
+    IP: 3  # per full inning
+    K: 1
+    W: 2
+    SV: 5
+    HD: 2
+    H: -1
+    ER: -2
+    BB: -1
+    L: -2
+
+positional_adjustments:
+  C: 12.5
+  SS: 7.5
+  "2B": 2.5
+  "3B": 2.5
+  CF: 2.5
+  LF: -7.5
+  RF: -7.5
+  "1B": -12.5
+  DH: -17.5
+
+keeper:
+  trajectory_weight: 0.50
+  ml_weight: 0.50
+  divergence_threshold: 25
+  thresholds:
+    auto_keep: 0.80
+    keep: 0.60
+    borderline: 0.40
+    # below borderline = CUT
+
+covid:
+  year: 2020
+  full_season_games: 162
+  actual_games: 60
+  sample_weight: 0.5
+
+features:
+  # Meta columns always included in feature CSV (not used as model inputs)
+  meta: [id, year, last, first, team, primary_pos, G]
+
+  batter:
+    # Counting (included in CSV for reference, excluded from model by COUNTING_LEAK_COLS)
+    counting: [b_pa, b_hr, b_r, b_rbi, b_sb, b_k, b_w]
+    # Model input features (edit this list to add/remove features)
+    model:
+      - AVG
+      - ISO
+      - BABIP
+      - K_pct
+      - BB_pct
+      - BB_K_pct
+      - SB_pct
+      - wOBA
+      - wRC_plus
+      - RE24
+      - GB_pct
+      - LD_pct
+      - HR_FB_pct
+      - brl_percent
+      - ev95percent
+      - anglesweetspotpercent
+      - est_ba
+      - est_slg
+      - est_woba
+      - sprint_speed
+      - BABIP_gap
+      - xBA_AVG_gap
+      - xSLG_SLG_gap
+      - team_rpg
+      - experience
+      - SB_rate
+      - career_BABIP
+      - K_pct_delta
+      - BB_pct_delta
+      - ISO_delta
+      - BABIP_delta
+
+  pitcher:
+    # Counting (included in CSV for reference, excluded from model by COUNTING_LEAK_COLS)
+    counting: [p_ipouts, p_bfp, p_k, p_h, p_er, p_w, p_hr, p_hbp, W, L, SV, HD, K_BB, BF, wOBA_against, sweet_spot_pct, ev50, gb_pct, K_pct_savant, SIERA]
+    # Model input features (edit this list to add/remove features)
+    model:
+      - ERA
+      - WHIP
+      - K9
+      - BB9
+      - HR9
+      - K_BB_pct
+      - BABIP_allowed
+      - LOB_pct
+      - ERA_minus
+      - xFIP_minus
+      - is_starter
+      - is_closer
+      - p_gf
+      - xera
+      - brl_percent_allowed
+      - ev95percent_against
+      - weighted_whiff_pct
+      - avg_hard_hit_pct
+      - swstr_pct
+      - csw_pct
+      - zone_pct
+      - chase_pct
+      - ff_avg_speed
+      - GB_pct
+      - BABIP_gap
+      - ERA_FIP_gap
+      - team_win_pct
+      - experience
+      - PF
+      - K9_delta
+      - ERA_delta
+      - WHIP_delta
+      - BB9_delta
+      - ff_velo_delta
+
+model:
+  random_state: 42
+  optuna_trials: 200
+  optuna_seeds: [42, 123, 456, 789, 1010]
+  replacement_level_pa: -20  # runs per 600 PA
+  runs_per_win: 10
+  prediction_bounds:
+    batter: [0, 750]
+    pitcher: [0, 650]
+    pitcher_sp: [0, 650]
+    pitcher_rp: [0, 350]
+  split_pitcher_roles: true

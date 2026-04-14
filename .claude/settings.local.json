@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Bash(pip install:*)",
+      "Bash(ls:*)",
+      "Bash(python3:*)",
+      "Bash(jupyter nbconvert:*)",
+      "Bash(pip show:*)",
+      "Bash(python -c \":*)",
+      "Bash(find C:UsersJakeDocumentsPythonBaseballfantasy_baseball_tool -type f -name *.png -o -name *.pdf)",
+      "Bash(wc:*)",
+      "Bash(head -3 data/raw/features/*.csv)",
+      "mcp__ide__executeCode",
+      "Bash(find C:/Users/Jake/Documents/Python/Baseball/fantasy_baseball_tool/data/fg_predictions/ -type f -name *.csv)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/Jake/Documents/Python/Baseball/fantasy_baseball_tool/**)",
+      "Bash(done)"
+    ]
+  }
+}

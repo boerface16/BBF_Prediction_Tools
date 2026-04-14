@@ -1,0 +1,24 @@
+Position	FirstName	LastName
+P	Tyler	Glasnow
+P	Jeff	Hoffman
+P	Zack	Littell
+P	Zebby	Matthews
+P	Michael	McGreevy
+P	Andrés	Muñoz
+P	David	Peterson
+P	Drew	Rasmussen
+P	Gerrit	Cole
+P	Max	Fried
+P	Bubba	Chandler
+OF	Bryan	Reynolds
+OF	Luis	Robert Jr.
+OF	Gavin	Sheets
+2B	Ceddanne	Rafaela
+C	Agustín	Ramírez
+C	Austin	Wells
+2B	Gleyber	Torres
+3B	Eugenio	Suárez
+SS	Josh	Smith
+1B	Alec	Burleson
+OF	Steven	Kwan
+OF	Heliot	Ramos
